@@ -20,42 +20,42 @@ For further information on usage and all else, visit http://www.rebootuser.com
 				5 SHA384
 				6 SHA512
 
- --delim	Include a delimiter between values
-			1 None (default)
-			2 Colon
-			3 Space
-			4 Ampersand
-			5 Comma
-			6 Period
-			7 Hyphen
-			8 Underscore
-			9 Pipe
-		       10 Semi-colon
-		       11 All of the above (slow)
+ 	--delim		Include a delimiter between values
+				1 None (default)
+				2 Colon
+				3 Space
+				4 Ampersand
+				5 Comma
+				6 Period
+				7 Hyphen
+				8 Underscore
+				9 Pipe
+				10 Semi-colon
+				11 All of the above (slow)
 
- --match	Specify a hash to match i.e. --match e23e4ae268f4ba432e74e625e6600e59
+	 --match	Specify a hash to match i.e. --match e23e4ae268f4ba432e74e625e6600e59
  
- --file		File containing values (one per line)
+	 --file		File containing values (one per line)
 		
-		Example:
-			name 
-			surname
-			email@rebootuser.com
-			phone_number
+			Example:
+				name 
+				surname
+				email@rebootuser.com
+				phone_number
 
- 		Generate Epochs (unix timestamps) between specified dates/times.
- 		Each timestamp will be tested with defined values from --file
+ 			Generate Epochs (unix timestamps) between specified dates/times.
+ 			Each timestamp will be tested with defined values from --file
+	
+ 	--st 		Define a start time [used with --et]
 
- --st 		Define a start time [used with --et]
+	 --et 		Define an end time [used with --st]
 
- --et 		Define an end time [used with --st]
+	 --sec 		Seconds since Epoch (default)
 
- --sec 		Seconds since Epoch (default)
+ 	--milli 	Milliseconds since Epoch 
 
- --milli 	Milliseconds since Epoch 
-
- 		Example:
- 			--st "2016-01-01 09:23:01" --et "2016-01-01 09:25:01" --milli
+ 			Example:
+ 				--st "2016-01-01 09:23:01" --et "2016-01-01 09:25:01" --milli
 
 ### Example Usage:
 
