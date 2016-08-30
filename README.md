@@ -1,7 +1,7 @@
 # HashMash
 For more information visit www.rebootuser.com
 
-## Version0 0.2
+## Version 0.2
 * Added support for more hashing algorithms and delimiters
 * Now can select '11' to use all delimiters in a single attack
 
