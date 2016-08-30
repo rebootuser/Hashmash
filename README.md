@@ -12,13 +12,13 @@ For further information on usage and all else, visit http://www.rebootuser.com
 
 ### General usage:
 
- --alg		Hashing algorithm to use 
-			1 MD5 (default)
-			2 SHA1
-			3 SHA224
-			4 SHA256
-			5 SHA384
-			6 SHA512
+ 	--alg		Hashing algorithm to use 
+				1 MD5 (default)
+				2 SHA1
+				3 SHA224
+				4 SHA256
+				5 SHA384
+				6 SHA512
 
  --delim	Include a delimiter between values
 			1 None (default)
