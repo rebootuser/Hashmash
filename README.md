@@ -3,7 +3,7 @@ For more information visit www.rebootuser.com
 
 ## Version 0.2
 * Added support for more hashing algorithms and delimiters
-* Now can select '11' to use all delimiters in a single attack
+* Now can select '--alg 11' to use all delimiters in a single attack
 
 ### Description:
 HashMash has been created to aid in generating various hashes from user supplied values. Occasionally on a test you'll see some dodgy looking functionality that you might look at and say *'that looks vulnerable'*. For example password reset functionality that returns an MD5 hash of something. Here's where Hashmash comes in.
