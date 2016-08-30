@@ -7,6 +7,7 @@ from datetime import timedelta, datetime
 
 infile=""
 delim=1	
+alldels = ["",":"," ","&",",",".","-","_","|",";"]
 hashtype=1
 intimes=""
 intimef=""
@@ -25,20 +26,29 @@ def usage():
  | $$  | $$|  $$$$$$$ /$$$$$$$/| $$  | $$| $$ | $$ | $$|  $$$$$$$ /$$$$$$$/| $$  | $$
  |__/  |__/ \_______/|_______/ |__/  |__/|__/ |__/ |__/ \_______/|_______/ |__/  |__/
 
-									version 0.1
+									version 0.2
  -h 		You're here
 
- --alg		Hash algorithm to use 
+ --alg		Hashing algorithm to use 
 			1 MD5 (default)
 			2 SHA1
-			3 SHA256
-			4 SHA512
+			3 SHA224
+			4 SHA256
+			5 SHA384
+			6 SHA512
 
  --delim	Include a delimiter between values
 			1 None (default)
 			2 Colon
 			3 Space
 			4 Ampersand
+			5 Comma
+			6 Period
+			7 Hyphen
+			8 Underscore
+			9 Pipe
+		       10 Semi-colon
+		       11 All of the above (slow)
 
  --match	Specify a hash to match i.e. --match e23e4ae268f4ba432e74e625e6600e59
  
@@ -61,9 +71,9 @@ def usage():
 
  --milli 	Milliseconds since Epoch 
 
- 		Example:
+ 		Example ("year-mon-day hour-min-second"):
  			--st "2016-01-01 09:23:01" --et "2016-01-01 09:25:01" --milli
-
+	
 	'''
 
 def md5hash(suppliedhash):
@@ -74,9 +84,17 @@ def sha1hash(suppliedhash):
 	hashed=hashlib.sha1(suppliedhash).hexdigest()
 	return hashed
 
+def sha224hash(suppliedhash):
+	hashed=hashlib.sha224(suppliedhash).hexdigest()
+	return hashed
+
 def sha256hash(suppliedhash):
 	hashed=hashlib.sha256(suppliedhash).hexdigest()
 	return hashed
+
+def sha384hash(suppliedhash):
+        hashed=hashlib.sha384(suppliedhash).hexdigest()
+        return hashed
 
 def sha512hash(suppliedhash):
 	hashed=hashlib.sha512(suppliedhash).hexdigest()
@@ -111,35 +129,78 @@ def itterate():
 
 			if delim == 1: 
 				subvaljoin="".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
 			elif delim == 2:
 				subvaljoin=":".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
 			elif delim == 3:
 				subvaljoin=" ".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
 			elif delim == 4:
 				subvaljoin="&".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
+			elif delim == 5:
+                                subvaljoin=",".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
+			elif delim == 6:
+                                subvaljoin=".".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
+			elif delim == 7:
+                                subvaljoin="-".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
+			elif delim == 8:
+                                subvaljoin="_".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
+			elif delim == 9:
+                                subvaljoin="|".join(subval)
+				print "Cleartext Value: " + subvaljoin
+				hashtest(subvaljoin)
+			elif delim == 10:
+                                subvaljoin=";".join(subval)
+                                print "Cleartext Value: " + subvaljoin
+                                hashtest(subvaljoin)
+			elif delim == 11:
+				for dels in alldels:
+	                                subvaljoin=dels.join(subval)
+					print "Cleartext Value: " + subvaljoin
+					hashtest(subvaljoin)
+
 			else:
 				sys.exit()
 			
-			print "Cleartext Value: " + subvaljoin
+def hashtest(subvaljoin):
+	if hashtype == 1:
+		hashed = md5hash(subvaljoin)
+		print hashed
+	elif hashtype == 2:
+		hashed = sha1hash(subvaljoin)
+		print hashed
+	elif hashtype == 3:
+		hashed = sha224hash(subvaljoin)
+		print hashed
+	elif hashtype == 4:
+                hashed = sha256hash(subvaljoin)
+                print hashed
+	elif hashtype == 5:
+                hashed = sha384hash(subvaljoin)
+                print hashed
+	elif hashtype == 6:
+		hashed = sha512hash(subvaljoin)
+		print hashed
+	else:
+		sys.exit()
 
-			if hashtype == 1:
-				hashed = md5hash(subvaljoin)
-				print hashed
-			elif hashtype == 2:
-				hashed = sha1hash(subvaljoin)
-				print hashed
-			elif hashtype == 3:
-				hashed = sha256hash(subvaljoin)
-				print hashed
-			elif hashtype == 4:
-				hashed = sha512hash(subvaljoin)
-				print hashed
-			else:
-				sys.exit()
-
-			if match == hashed:
-				print ("\n[+] Gotya! \n%s\n")%subvaljoin
-				sys.exit()
+	if match == hashed:
+		print ("\n[+] Gotya! \n%s\n")%subvaljoin
+		sys.exit()
 
 def main():
 	try:
@@ -183,7 +244,7 @@ def main():
 			elif opt == "--alg":
 				global hashtype
 				hashtype = int(arg)
-				if 1 <= hashtype <= 4:
+				if 1 <= hashtype <= 6:
 					pass
 				else:
 					usage()
@@ -192,7 +253,7 @@ def main():
 			elif opt == "--delim":
 				global delim
 				delim = int(arg)
-				if 1 <= delim <= 4:
+				if 1 <= delim <= 11:
 					pass
 				else:
 					usage()
